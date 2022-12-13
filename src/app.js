@@ -26,7 +26,7 @@ app.get("/register", (req, res)=>{
 app.get("/signin", (req, res)=>{
   res.render("register");
 });
-app.get("/pay",  (req, res)=>{
+app.get("/pay", middleware, (req, res)=>{
   res.render("pay");
 });
 
@@ -40,6 +40,10 @@ app.post("/register", async(req, res)=>{
       const userage = req.body.age;
       if(userage<18 || userage>65){
         res.send("Age is not valid");
+      }
+      const useremailll = await Register.findOne({email:req.body.email});
+      if(useremailll){
+        res.send("Email Already Exists!!");
       }
       if(password === cpassword){
         const registerEmployee = new Register({
