@@ -71,7 +71,7 @@ app.post("/pay", async(req, res)=>{
       })
       console.log(payedcust.email);
       const registered =  await payedcust.save();
-       res.status(201).render("index", {name: payedcust.name,email:payedcust,slot:payedcust.slot});
+       res.status(201).render("index1", {name: payedcust.name,email:payedcust.email,slot:payedcust.slot});
       //res.send("")
   }
   catch(error){
@@ -130,7 +130,7 @@ app.post("/signin", async(req, res)=>{
         console.log(d);
         if(useremail.password === password){
           if(t1==t2){
-            res.status(201).render("index1",{name: username,email:useremail,slot:userslot});
+            res.status(201).render("index1",{name: username,email:useremail.email,slot:userslot});
           }
           else{
             res.status(201).render("index",{name: username,email:useremail,slot:userslot});
@@ -140,6 +140,7 @@ app.post("/signin", async(req, res)=>{
           res.send("password are not matching");
         }
     } catch(error){
+      console.log(error);
         res.status(400).send("Invalid Email");
     }
 });
