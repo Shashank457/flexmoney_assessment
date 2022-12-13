@@ -69,9 +69,9 @@ app.post("/pay", async(req, res)=>{
         slot: req.body.slot,
         date: new Date()
       })
-      
+      console.log(payedcust.email);
       const registered =  await payedcust.save();
-       res.status(201).render("index");
+       res.status(201).render("index", {name: payedcust.name,email:payedcust,slot:payedcust.slot});
       //res.send("")
   }
   catch(error){
